@@ -1,0 +1,11 @@
+{  
+"Name": "Focus",  
+"Brand": "Ford",
+"Capacity": "1.8",
+"Seats": [
+	{"Material": "Velvet", "Color": "Black"},
+	{"Material": "Carboon", "Color": "Gray"},  
+	{"Material": "Fabric", "Color": "White"}, 
+	{"Material": "Alcantara", "Color": "Yellow"}  
+	]
+}
