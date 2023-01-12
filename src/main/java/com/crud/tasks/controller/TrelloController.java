@@ -21,9 +21,15 @@ public class TrelloController {
     @GetMapping("boards")
     public ResponseEntity<List<TrelloBoardDto>> getTrelloBoards() {
         return ResponseEntity.ok(trelloClient.getTrelloBoards());
+//        trelloBoards.stream()
+//                .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getName()).isPresent())
+//                .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getId()).isPresent())
+//                .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
+//                .forEach(trelloBoardDto -> {
+//                    System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName());
+//                });
     }
-
-    @PostMapping("cards")
+    @PostMapping(value = "cards")
     public ResponseEntity<CreatedTrelloCard> createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
         return ResponseEntity.ok(trelloClient.createNewCard(trelloCardDto));
     }
