@@ -3,7 +3,6 @@ package com.crud.tasks.controller;
 import com.crud.tasks.domain.CreatedTrelloCard;
 import com.crud.tasks.domain.TrelloBoardDto;
 import com.crud.tasks.domain.TrelloCardDto;
-import com.crud.tasks.service.TrelloService;
 import com.crud.tasks.trello.client.TrelloClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +16,21 @@ import java.util.List;
 @CrossOrigin("*")
 public class TrelloController {
 
-    private final TrelloService trelloService;
-
+    private final TrelloClient trelloClient;
 
     @GetMapping("boards")
     public ResponseEntity<List<TrelloBoardDto>> getTrelloBoards() {
-        return ResponseEntity.ok(trelloService.fetchTrelloBoards());
+        return ResponseEntity.ok(trelloClient.getTrelloBoards());
+//        trelloBoards.stream()
+//                .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getName()).isPresent())
+//                .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getId()).isPresent())
+//                .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
+//                .forEach(trelloBoardDto -> {
+//                    System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName());
+//                });
     }
-
-
-    @PostMapping("cards")
+    @PostMapping(value = "cards")
     public ResponseEntity<CreatedTrelloCard> createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-        return ResponseEntity.ok(trelloService.createTrelloCard(trelloCardDto));
+        return ResponseEntity.ok(trelloClient.createNewCard(trelloCardDto));
     }
 }
