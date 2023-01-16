@@ -1,6 +1,5 @@
 package com.crud.tasks.controller;
 
-
 import com.crud.tasks.domain.Task;
 import com.crud.tasks.domain.TaskDto;
 import com.crud.tasks.mapper.TaskMapper;
@@ -12,14 +11,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/v1/tasks")
 @RequiredArgsConstructor
-@CrossOrigin("*")
 public class TaskController {
 
-    private final TaskMapper taskMapper;
     private final DbService service;
+    private final TaskMapper taskMapper;
 
     @GetMapping
     public ResponseEntity<List<TaskDto>> getTasks() {
@@ -33,9 +32,8 @@ public class TaskController {
     }
 
     @DeleteMapping(value = "{taskId}")
-    public ResponseEntity<Void> deleteTask(@PathVariable Long taskId) throws TaskNotFoundException {
-        service.deleteById(taskId);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<TaskDto> deleteTask(@PathVariable Long taskId) {
+        return ResponseEntity.ok(taskMapper.mapToTaskDto(service.deleteTask(taskId)));
     }
 
     @PutMapping
@@ -45,11 +43,10 @@ public class TaskController {
         return ResponseEntity.ok(taskMapper.mapToTaskDto(savedTask));
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping (consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createTask(@RequestBody TaskDto taskDto) {
         Task task = taskMapper.mapToTask(taskDto);
         service.saveTask(task);
         return ResponseEntity.ok().build();
     }
-
 }

@@ -1,3 +1,7 @@
+**/out/
+**/build/
+**/.idea/
+
 HELP.md
 .gradle
 build/

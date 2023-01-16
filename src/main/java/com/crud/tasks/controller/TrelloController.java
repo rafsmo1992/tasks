@@ -17,20 +17,15 @@ import java.util.List;
 public class TrelloController {
 
     private final TrelloClient trelloClient;
+    private TrelloBoardDto trelloBoardDto;
+
+    @PostMapping("cards")
+    public ResponseEntity<CreatedTrelloCard> createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
+        return ResponseEntity.ok(trelloClient.createNewCard(trelloCardDto));
+    }
 
     @GetMapping("boards")
     public ResponseEntity<List<TrelloBoardDto>> getTrelloBoards() {
         return ResponseEntity.ok(trelloClient.getTrelloBoards());
-//        trelloBoards.stream()
-//                .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getName()).isPresent())
-//                .filter(trelloBoardDto -> Optional.ofNullable(trelloBoardDto.getId()).isPresent())
-//                .filter(trelloBoardDto -> trelloBoardDto.getName().contains("Kodilla"))
-//                .forEach(trelloBoardDto -> {
-//                    System.out.println(trelloBoardDto.getId() + " " + trelloBoardDto.getName());
-//                });
-    }
-    @PostMapping(value = "cards")
-    public ResponseEntity<CreatedTrelloCard> createTrelloCard(@RequestBody TrelloCardDto trelloCardDto) {
-        return ResponseEntity.ok(trelloClient.createNewCard(trelloCardDto));
     }
 }
