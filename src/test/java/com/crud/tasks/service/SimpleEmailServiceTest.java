@@ -1,4 +1,4 @@
-/*package com.crud.tasks.service;
+package com.crud.tasks.service;
 
 import com.crud.tasks.domain.Mail;
 import org.junit.jupiter.api.Test;
@@ -17,7 +17,7 @@ import static org.mockito.Mockito.verify;
 class SimpleEmailServiceTest {
 
     @InjectMocks
-    //private SimpleEmailService simpleEmailService;
+    private SimpleEmailService simpleEmailService;
 
     @Mock
     private JavaMailSender javaMailSender;
@@ -38,11 +38,9 @@ class SimpleEmailServiceTest {
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-        When
+        //When
         simpleEmailService.send(mail);
-        Then
+        //Then
         verify(javaMailSender, times(1)).send(mailMessage);
     }
 }
-
- */
