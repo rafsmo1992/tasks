@@ -13,7 +13,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class TrelloFasadeTest {
+public class TrelloMapperTest {
     @Autowired
     TrelloMapper trelloMapper;
 
